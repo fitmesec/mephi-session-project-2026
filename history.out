@@ -139,3 +139,159 @@
   139  curl http://localhost/
   140  cd ~
   141  history > ~/history.out
+  142  ping -c 4 8.8.8.8 > ~/ping.out
+  143  stat /data/mephi-2026 > ~/stat.out
+  144  stat /mephi-web >> ~/stat.out
+  145  getcap /usr/sbin/tcpdump > ~/getcap.out
+  146  dnf history > ~/dnf.out
+  147  journalctl -u nginx -b > ~/journalctl.out
+  148  getenforce > ~/getenforce.out
+  149  curl http://localhost/ > ~/curl.out
+  150  getfacl -R /data/mephi-2026 > ~/getfacl.out 2>/dev/null
+  151  mkdir -p ~/mephi-session-project-2026
+  152  cp ~/*.out ~/mephi-session-project-2026/
+  153  sudo cp /etc/fstab /etc/passwd /etc/shadow /etc/group /etc/security/pwquality.conf ~/mephi-session-project-2026/
+  154  sudo chown -R alina:alina ~/mephi-session-project-2026
+  155  ls -l ~/mephi-session-project-2026
+  156  cd ~/mephi-session-project-2026
+  157  sudo getfacl -R /data/mephi-2026 > getfacl.out 2>/dev/null
+  158  sudo journalctl -u nginx -b > journalctl.out
+  159  chmod 644 shadow
+  160  cp getfacl.out journalctl.out ~/
+  161  ls -l getfacl.out journalctl.out shadow
+  162  cat journalctl.out
+  163  cat getcap.out getenforce.out curl.out
+  164  tail -5 dnf.out
+  165  clear; hostname; curl http://localhost/; date
+  166  scp -r alina@192.168.3.17:~/mephi-session-project-2026 ~/
+  167  mv ~/Desktop/Снимок\ экрана*.png ~/mephi-session-project-2026/mephi-screenshot.png
+  168  ls -l ~/mephi-session-project-2026
+  169  scp -r alina@192.168.3.17:~/mephi-session-project-2026 ~/
+  170  mv ~/Desktop/Снимок\ экрана*.png ~/mephi-session-project-2026/mephi-screenshot.png
+  171  ls -l ~/mephi-session-project-2026
+  172  scp -r alina@192.168.3.17:~/mephi-session-project-2026 ~/
+  173  mv ~/Desktop/Снимок\ экрана*.png ~/mephi-session-project-2026/mephi-screenshot.png
+  174  ls -l ~/mephi-session-project-2026
+  175  scp -r alina@192.168.3.17:~/mephi-session-project-2026 ~/
+  176  mv ~/Desktop/Снимок\ экрана*.png ~/mephi-session-project-2026/mephi-screenshot.png
+  177  ls -l ~/mephi-session-project-2026
+  178  exit
+  179  clear; hostname; curl http://localhost/; date
+  180  exit
+  181  sudo chage -l alina | head -1
+  182  sudo chage -M 90 alina
+  183  sudo chage -d "$(date +%F)" -M 90 root
+  184  sudo chage -l alina | grep -E 'Последний|Максимальное'
+  185  sudo chage -l root | grep -E 'Последний|Максимальное'
+  186  grep pwquality /etc/pam.d/system-auth /etc/pam.d/password-auth
+  187  nmcli -g ipv4.method connection show "$(nmcli -g GENERAL.CONNECTION device show enp0s1)"
+  188  cd ~/mephi-session-project-2026
+  189  nmcli device show enp0s1 > nmcli.out
+  190  echo "ipv4.method: $(nmcli -g ipv4.method connection show "$(nmcli -g GENERAL.CONNECTION device show enp0s1)")" >> nmcli.out
+  191  cp /etc/login.defs .
+  192  sudo cp /etc/shadow . && sudo chown alina:alina shadow && chmod 644 shadow
+  193  history -a
+  194  history > history.out
+  195  cp history.out ~/
+  196  ls -l nmcli.out login.defs shadow history.out
+  197  exit
+  198  sudo passwd user1
+  199  sudo passwd user2
+  200  sudo passwd user3
+  201  sudo systemctl enable --now firewalld
+  202  sudo firewall-cmd --permanent --add-service=ssh
+  203  sudo firewall-cmd --permanent --add-service=http
+  204  sudo firewall-cmd --reload
+  205  sudo firewall-cmd --state
+  206  sudo firewall-cmd --list-services
+  207  curl http://localhost/
+  208  [alina@mephi-2026 ~]$ sudo passwd user1
+  209  sudo passwd user2
+  210  sudo passwd user3
+  211  [sudo] пароль для alina: 
+  212  Изменение пароля пользователя user1.
+  213  Новый пароль: 
+  214  Повторите ввод нового пароля: 
+  215  passwd: данные аутентификации успешно обновлены.
+  216  Изменение пароля пользователя user2.
+  217  Новый пароль: 
+  218  Повторите ввод нового пароля: 
+  219  passwd: данные аутентификации успешно обновлены.
+  220  Изменение пароля пользователя user3.
+  221  Новый пароль: 
+  222  Повторите ввод нового пароля: 
+  223  passwd: данные аутентификации успешно обновлены.
+  224  [alina@mephi-2026 ~]$ sudo systemctl enable --now firewalld
+  225  sudo firewall-cmd --permanent --add-service=ssh
+  226  sudo firewall-cmd --permanent --add-service=http
+  227  sudo firewall-cmd --reload
+  228  sudo firewall-cmd --state
+  229  sudo firewall-cmd --list-services
+  230  curl http://localhost/
+  231  Created symlink /etc/systemd/system/dbus-org.fedoraproject.FirewallD1.service → /usr/lib/systemd/system/firewalld.service.
+  232  Created symlink /etc/systemd/system/multi-user.target.wants/firewalld.service → /usr/lib/systemd/system/firewalld.service.
+  233  Warning: ALREADY_ENABLED: ssh
+  234  success
+  235  running
+  236  dhcpv6-client http mdns ssh
+  237  Hello from Student: 373175
+  238  [alina@mephi-2026 ~]$ 
+  239  sudo firewall-cmd --permanent --remove-service=mdns
+  240  sudo firewall-cmd --reload
+  241  sudo firewall-cmd --list-services
+  242  history -a
+  243  sudo reboot
+  244  hostname
+  245  findmnt /mephi-web
+  246  systemctl is-enabled nginx firewalld; systemctl is-active nginx firewalld
+  247  getenforce
+  248  sudo firewall-cmd --list-services
+  249  curl http://localhost/
+  250  cd ~/mephi-session-project-2026
+  251  history > history.out
+  252  ping -c 4 8.8.8.8 > ping.out
+  253  stat /data/mephi-2026 > stat.out
+  254  stat /mephi-web >> stat.out
+  255  getcap /usr/sbin/tcpdump > getcap.out
+  256  dnf history > dnf.out
+  257  sudo journalctl -u nginx -b > journalctl.out
+  258  getenforce > getenforce.out
+  259  curl http://localhost/ > curl.out
+  260  sudo getfacl -R /data/mephi-2026 > getfacl.out 2>/dev/null
+  261  nmcli device show enp0s1 > nmcli.out
+  262  echo "ipv4.method: $(nmcli -g ipv4.method connection show "$(nmcli -g GENERAL.CONNECTION device show enp0s1)")" >> nmcli.out
+  263  sudo firewall-cmd --list-all > firewall.out
+  264  cp /etc/fstab /etc/passwd /etc/group /etc/login.defs /etc/security/pwquality.conf .
+  265  sudo cp /etc/shadow . && sudo chown alina:alina shadow && chmod 644 shadow
+  266  cp *.out ~/
+  267  ls -l
+  268  exit
+  269  hostname
+  270  findmnt /mephi-web
+  271  systemctl is-enabled nginx firewalld; systemctl is-active nginx firewalld
+  272  getenforce
+  273  sudo firewall-cmd --list-services
+  274  curl http://localhost/
+  275  cd ~/mephi-session-project-2026
+  276  history > history.out
+  277  ping -c 4 8.8.8.8 > ping.out
+  278  stat /data/mephi-2026 > stat.out
+  279  stat /mephi-web >> stat.out
+  280  getcap /usr/sbin/tcpdump > getcap.out
+  281  dnf history > dnf.out
+  282  sudo journalctl -u nginx -b > journalctl.out
+  283  getenforce > getenforce.out
+  284  curl http://localhost/ > curl.out
+  285  sudo getfacl -R /data/mephi-2026 > getfacl.out 2>/dev/null
+  286  nmcli device show enp0s1 > nmcli.out
+  287  echo "ipv4.method: $(nmcli -g ipv4.method connection show "$(nmcli -g GENERAL.CONNECTION device show enp0s1)")" >> nmcli.out
+  288  sudo firewall-cmd --list-all > firewall.out
+  289  cp /etc/fstab /etc/passwd /etc/group /etc/login.defs /etc/security/pwquality.conf .
+  290  sudo cp /etc/shadow . && sudo chown alina:alina shadow && chmod 644 shadow
+  291  cp *.out ~/
+  292  ls -l
+  293  exit
+  294  su - user2 -c whoami
+  295  cd ~/mephi-session-project-2026
+  296  history -a
+  297  history > history.out
