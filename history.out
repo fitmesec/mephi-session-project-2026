@@ -1,0 +1,141 @@
+    1  ip a
+    2  systemctl status sshd
+    3  ip route
+    4  sudo firewall-cmd --state
+    5  curl -v http://77.88.8.8 --max-time 5
+    6  curl -sI https://redos.red-soft.ru --max-time 10
+    7  curl -sI https://mirror.red-soft.ru --max-time 10
+    8  curl -sI --max-time 10 --resolve redos.red-soft.ru:443:5.188.53.10 https://redos.red-soft.ru
+    9  getent hosts redos.red-soft.ru
+   10  sudo mkdir -p /etc/systemd/resolved.conf.d
+   11  sudo tee /etc/systemd/resolved.conf.d/dns.conf > /dev/null <<'EOF'
+   12  [Resolve]
+   13  DNS=8.8.8.8 1.1.1.1
+   14  Domains=~.
+   15  EOF
+   16  sudo systemctl restart systemd-resolved
+   17  getent hosts redos.red-soft.ru
+   18  curl -sI https://redos.red-soft.ru --max-time 10 | head -1
+   19  ping -c 4 8.8.8.8 > ~/ping.out; cat ~/ping.out
+   20  ping -c 4 192.168.64.1 > ~/ping.out; cat ~/ping.out
+   21  sudo dnf update -y
+   22  ping -c 4 8.8.8.8
+   23  sudo shutdown now
+   24  ping -c 4 8.8.8.8
+   25  ping -c 4 8.8.8.8 > ~/ping.out; cat ~/ping.out
+   26  ping -c 4 8.8.8.8
+   27  sudo reboot
+   28  hostname -l
+   29  hostname -I
+   30  uname -r
+   31  sudo dnf install -y nginx libcap-ng-utils
+   32  rpm -q nginx libcap-ng-utils
+   33  which getcap setcap filecap
+   34  rpm -q tcpdump
+   35  sudo dnf download tcpdump --destdir /tmp
+   36  ls -l /tmp/tcpdump*.rpm
+   37  rpm -K /tmp/tcpdump*.rpm
+   38  rpm -qpR /tmp/tcpdump*.rpm
+   39  sudo rpm -ivh /tmp/tcpdump*.rpm
+   40  rpm -q libpcap
+   41  rpm -q --whatrequires libpcap
+   42  command -v getcap setcap filecap
+   43  ls -l /usr/sbin/tcpdump
+   44  getcap /usr/sbin/tcpdump
+   45  rpm -q --whatrequires 'libpcap.so.1()(64bit)'
+   46  rpm -q --whatprovides 'libpcap.so.1()(64bit)'
+   47  lsblk -f
+   48  command -v parted
+   49  sudo parted -s /dev/vdb mklabel gpt mkpart mephi-web ext4 0% 100%
+   50  lsblk /dev/vdb
+   51  sudo parted -s /dev/vdb mklabel gpt mkpart mephi-web ext4 0% 100%
+   52  lsblk /dev/vdb
+   53  echo ',,L' | sudo sfdisk --label gpt /dev/vdb
+   54  sudo mkfs.ext4 -L MEPHI_WEB /dev/vdb1
+   55  sudo mkdir -p /mephi-web
+   56  echo 'LABEL=MEPHI_WEB  /mephi-web  ext4  defaults  0 2' | sudo tee -a /etc/fstab
+   57  sudo findmnt --verify
+   58  sudo systemctl daemon-reload
+   59  sudo mount /mephi-web
+   60  findmnt /mephi-web
+   61  lsblk -f /dev/vdb
+   62  getenforce
+   63  grep ^SELINUX= /etc/selinux/config
+   64  sudo groupadd -g 5500 developers
+   65  sudo groupadd -g 4444 curators
+   66  getent group developers curators
+   67  sudo useradd -u 5501 -G developers user1
+   68  sudo useradd -u 5502 -G developers user2
+   69  sudo useradd -u 5503 -G developers user3
+   70  sudo useradd -G curators curator1
+   71  sudo useradd -G curators curator2
+   72  id user1; id user2; id user3; id curator1; id curator2
+   73  sudo mkdir -p /data/mephi-2026
+   74  sudo chown root:developers /data/mephi-2026
+   75  sudo chmod 2770 /data/mephi-2026
+   76  ls -ld /data/mephi-2026
+   77  sudo setfacl -m g:curators:r-x /data/mephi-2026
+   78  sudo setfacl -d -m u::rwx,g::rwx,g:curators:r-x,o::---,m::rwx /data/mephi-2026
+   79  getfacl /data/mephi-2026
+   80  sudo -u user1 sh -c 'echo "от user1" > /data/mephi-2026/test.txt'
+   81  sudo -u user2 sh -c 'echo "от user2" >> /data/mephi-2026/test.txt'
+   82  sudo -u user3 sh -c 'echo "от user3" >> /data/mephi-2026/test.txt'
+   83  sudo -u curator1 cat /data/mephi-2026/test.txt
+   84  sudo -u curator1 sh -c 'echo "от куратора" >> /data/mephi-2026/test.txt'
+   85  sudo -u alina cat /data/mephi-2026/test.txt
+   86  ls -l /data/mephi-2026/
+   87  sudo ls -l /data/mephi-2026/
+   88  sudo getfacl /data/mephi-2026/test.txt
+   89  sudo setcap cap_net_raw,cap_net_admin=eip /usr/sbin/tcpdump
+   90  getcap /usr/sbin/tcpdump
+   91  sudo -u user1 tcpdump -c 3 -i enp0s1
+   92  command -v semanage
+   93  ls -Zd /mephi-web
+   94  sudo dnf install -y policycoreutils-python-utils
+   95  command -v semanage
+   96  sudo semanage fcontext -a -t httpd_sys_content_t "/mephi-web(/.*)?"
+   97  sudo restorecon -Rv /mephi-web
+   98  ls -Zd /mephi-web
+   99  echo "Hello from Student: 12345" | sudo tee /mephi-web/index.html
+  100  ls -lZ /mephi-web/index.html
+  101  echo "Hello from Student: 373175" | sudo tee /mephi-web/index.html
+  102  ls -lZ /mephi-web/index.html
+  103  grep -n "root" /etc/nginx/nginx.conf
+  104  sudo sed -i 's|root\s*/usr/share/nginx/html;|root /mephi-web;|' /etc/nginx/nginx.conf
+  105  grep -n "root" /etc/nginx/nginx.conf
+  106  sudo nginx -t
+  107  sudo systemctl enable --now nginx
+  108  systemctl is-enabled nginx
+  109  systemctl is-active nginx
+  110  curl http://localhost/
+  111  sudo usermod -s /sbin/nologin curator1
+  112  sudo usermod -s /sbin/nologin curator2
+  113  getent passwd curator1 curator2 user1
+  114  sudo sed -i 's/^PASS_MAX_DAYS.*/PASS_MAX_DAYS   90/' /etc/login.defs
+  115  grep ^PASS_MAX_DAYS /etc/login.defs
+  116  for u in alina user1 user2 user3 curator1 curator2; do sudo chage -M 90 "$u"; done
+  117  sudo chage -l user1
+  118  passwd
+  119  sudo chage -M 99999 alina
+  120  for u in user1 user2 user3 curator1 curator2; do sudo chage -M 90 "$u"; done
+  121  sudo chage -l user1
+  122  sudo sed -i 's/^#\?\s*minlen.*/minlen = 12/' /etc/security/pwquality.conf
+  123  grep minlen /etc/security/pwquality.conf
+  124  for u in user1 user2 user3; do echo "$u:Developer-2026" | sudo chpasswd; done
+  125  sudo passwd -S user1
+  126  echo "abc12345" | pwscore
+  127  echo "Developer-2026" | pwscore
+  128  sudo su - curator1
+  129  sudo su - user1 -c 'whoami'
+  130  history -a
+  131  sudo reboot
+  132  hostname
+  133  findmnt /mephi-web
+  134  systemctl is-enabled nginx; systemctl is-active nginx
+  135  getenforce
+  136  getcap /usr/sbin/tcpdump
+  137  getfacl /data/mephi-2026 2>/dev/null | head -5
+  138  sudo chage -l user1 | grep Максимальное
+  139  curl http://localhost/
+  140  cd ~
+  141  history > ~/history.out
